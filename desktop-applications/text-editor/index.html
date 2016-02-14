@@ -1,0 +1,73 @@
+<html>
+
+<head>
+  <title>Simple Text Editor</title>
+  <link rel="stylesheet" href="https://cdn.quilljs.com/0.20.1/quill.snow.css" />
+  <style>
+    .ql-snow {
+      border: 1px solid black;
+    }
+
+    #editor {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="toolbar">
+    <span class="ql-format-group">
+      <select class="ql-font">
+        <option value="sans-serif">Sans Serif</option>
+        <option value="serif">Serif</option>
+        <option value="monospace">Monospace</option>
+      </select>
+      <select class="ql-size">
+        <option value="10px">Small</option>
+        <option value="13px" selected>Normal</option>
+        <option value="18px">Large</option>
+        <option value="32px">Huge</option>
+      </select>
+    </span>
+    <span class="ql-format-group">
+      <span title="Bold" class="ql-format-button ql-bold"></span>
+      <div class="ql-format-separator"></div>
+      <span title="Italic" class="ql-format-button ql-italic"></span>
+      <div class="ql-format-separator"></div>
+      <span title="Underline" class="ql-format-button ql-underline"></span>
+      <div class="ql-format-separator"></div>
+      <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+    </span>
+    <span class="ql-format-group">
+      <span title="Save" id="save" class="ql-format-button">Save</span>
+    </span>
+  </div>
+
+  <div id="editor"></div>
+  <script>
+    const Quill = require('quill');
+    const startingText = localStorage.getItem('body');
+    const fullEditor = new Quill('#editor', {
+      modules: {
+        'toolbar': { container: '#toolbar' }
+      },
+      theme: 'snow'
+    });
+    const saveButton = document.getElementById('save');
+
+    if (startingText) {
+      fullEditor.setHTML(startingText);
+    }
+
+    saveButton.addEventListener(
+      'click',
+      () => {
+        localStorage.setItem('body', fullEditor.getHTML());
+        new Notification('Simple Text Editor', { body: 'Saved!' });
+      },
+      false
+    );
+  </script>
+</body>
+
+</html>
