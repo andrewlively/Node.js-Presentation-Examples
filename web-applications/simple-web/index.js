@@ -8,8 +8,8 @@ const server = http.createServer((req, res) => {
 
   const name = queryObject.name || 'World';
 
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end(`Hello, ${ name }!`);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end(`<h1>Hello, ${ name }!</h1>`);
 });
 
 server.listen(3000);
