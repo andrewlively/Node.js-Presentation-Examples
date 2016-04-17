@@ -63,3 +63,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+config.json
+dist/
+public/
